@@ -36,14 +36,18 @@ post "/register" do
 	email = params[:email]
 	password = params[:password]
 
-	u = User.new
-	u.email = email.downcase
-	u.password =  password
-	u.save
+	if email && password && User.first(email: email.downcase).nil?
+		u = User.new
+		u.email = email.downcase
+		u.password =  password
+		u.save
 
-	session[:user_id] = u.id
+		session[:user_id] = u.id
 
-	erb :"authentication/successful_signup"
+		erb :"authentication/successful_signup"
+	else
+		erb :"authentication/failed_signup"
+	end
 
 end
 
@@ -51,8 +55,8 @@ end
 #Returns nil if not signed in
 def current_user
 	if(session[:user_id])
-		u = User.first(id: session[:user_id])
-		return u
+		@u ||= User.first(id: session[:user_id])
+		return @u
 	else
 		return nil
 	end
@@ -63,5 +67,4 @@ def authenticate!
 	if !current_user
 		redirect "/login"
 	end
-	
 end

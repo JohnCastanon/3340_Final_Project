@@ -1,3 +1,19 @@
+<div class="container">
+  <% @videos.each do |v| %>
+
+  <h2>  <%= v.title %>   
+  	    <% if v.pro == true %>
+          <button type="button" class="btn btn-success">PRO VID</button></br>
+        <% end %>
+
+	     </h2> 
 
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/D5fKhUlwxoE" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+  <p><%= v.description %></p>
+  <%= youtube_embed(v.video_url) %></br></br></br></br>
+
+  
+
+  <% end %>
+</div>
