@@ -95,6 +95,9 @@ def admin
 end
 
 
+
+
+
 #make an admin user if one doesn't exist!
 if User.all(administrator: true).count == 0
 	u = User.new
@@ -125,6 +128,9 @@ end
 get "/videos" do
 	authenticate!
 
+@b = "1408 Magdalena Ave Mission,Tx 78572"
+
+
 if current_user.pro || current_user.administrator
 	@videos = Video.all
 
@@ -132,6 +138,9 @@ else
 	@videos = Video.all(pro: false)
 	
 end	
+
+
+
 
 
 	

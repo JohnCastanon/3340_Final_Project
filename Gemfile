@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 gem 'sinatra'
 gem 'data_mapper'
+gem 'multimedia_paradise', '~> 1.0', '>= 1.0.383'
 gem 'stripe'
 group :development do
   gem "sqlite3-ruby"
