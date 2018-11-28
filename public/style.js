@@ -1,6 +1,3 @@
-
-
-
 $("#search").on("click" , function() {
 
 
