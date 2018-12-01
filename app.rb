@@ -188,6 +188,18 @@ get "/upgrade" do
 
 end
 
+get "/selling" do 
+
+
+    erb :selling
+end 
+
+get "/profile" do
+
+  erb :profile
+
+end 
+
 
 post "/charge" do
     # Amount in cents

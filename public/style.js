@@ -1,8 +1,6 @@
-$("#search").on("click" , function() {
-
-
-alert("sup");
-
-return false;
+var values=1
+$(".inspect").on("click",function(event){
+	
+	values=$(".inspect").find(".active").val()
 
 })
