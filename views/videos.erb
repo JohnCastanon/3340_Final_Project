@@ -1,21 +1,17 @@
 <div class="container">
   <% @videos.each do |v| %>
+  
+  <h2>  <%= v.seller%>   
 
-  <h2>  <%= v.title %>   
-  	    <% if v.pro == true %>
-          <button type="button" class="btn btn-success">PRO VID</button></br>
-        <% end %>
+  <h2>  <%= v.item %>   
+        
 
-	     </h2> 
+       </h2> 
 
 
   <p><%= v.description %></p>
-  <%= youtube_embed(v.video_url) %></br></br></br></br>
 
-  <iframe width="300" height="300" frameborder="0" style="border:0"
- src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBhhuxQJFlsd6DSUuuNeoRdGgPT5Otdk7U&q=montanna"
- allowfullscreen>
-</iframe>
+  
 
   <% end %>
 
