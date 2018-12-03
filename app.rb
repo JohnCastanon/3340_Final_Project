@@ -20,15 +20,16 @@ else
 end
 
 class Video
-	include DataMapper::Resource
+  include DataMapper::Resource
 
-	property :id, Serial
-	property :title, Text
-	property :description, Text
-	property :video_url, Text
-	property :pro, Boolean, :default => false
+  property :id, Serial
+  property :item, Text
+  property :description, Text
+  property :seller, Text
+  property :video_url, Text
+  property :pro, Boolean, :default => false
 
-	#fill in the rest
+  #fill in the rest
 end
 
 DataMapper.finalize
@@ -52,11 +53,11 @@ end
 
 #make an admin user if one doesn't exist!
 if User.all(administrator: true).count == 0
-	u = User.new
-	u.email = "admin@admin.com"
-	u.password = "admin"
-	u.administrator = true
-	u.save
+  u = User.new
+  u.email = "admin@admin.com"
+  u.password = "admin"
+  u.administrator = true
+  u.save
 
 
 
@@ -71,7 +72,7 @@ end
 
 def reg_user 
 if !current_user || current_user.pro || current_user.administrator
-	redirect "/"
+  redirect "/"
 end
 
 end 
@@ -80,7 +81,7 @@ end
 
 def pro_user 
 if current_user.pro
-		redirect "/"
+    redirect "/"
 end
 
 end 
@@ -89,9 +90,9 @@ end
 
 
 def admin
-	if !current_user || !current_user.administrator
-		redirect "/"
-	end
+  if !current_user || !current_user.administrator
+    redirect "/"
+  end
 end
 
 
@@ -100,11 +101,11 @@ end
 
 #make an admin user if one doesn't exist!
 if User.all(administrator: true).count == 0
-	u = User.new
-	u.email = "admin@admin.com"
-	u.password = "admin"
-	u.administrator = true
-	u.save
+  u = User.new
+  u.email = "admin@admin.com"
+  u.password = "admin"
+  u.administrator = true
+  u.save
 end
 
 
@@ -122,62 +123,82 @@ end
 
 get "/" do
 
-	erb :index
+  erb :index
 end
 
-get "/videos" do
-	authenticate!
+get "/reviews" do
 
-@b = "1408 Magdalena Ave Mission,Tx 78572"
+  erb :reviews
+end
+
+get "/ad" do
+
+  erb :ad
+end
+
+get "/showreviews" do
+
+  erb :showreviews
+end
+
+get "/admin" do
+
+  authenticate!
+  admin
+
+  erb :admin
+end
+
+
+get "/videos" do
+  authenticate!
+
 
 
 if current_user.pro || current_user.administrator
-	@videos = Video.all
+  @videos = Video.all
 
 else
-	@videos = Video.all(pro: false)
-	
-end	
+  @videos = Video.all(pro: false)
+  
+end 
 
 
 
 
 
-	
-	erb :videos
+  
+  erb :videos
 
 end
 
 
 
 
-post "/videos/create" do
+post "/seller/create" do
     authenticate!
-     if params["title"] 
-     	vid = Video.new
-     	vid.title = params["title"]
-     	vid.description = params["description"]
-     	vid.video_url = params["video_url"]
+     if params["Item"] 
+      vid = Video.new
+      vid.item = params["Item"]
+      vid.description = params["description"]
+      vid.seller = current_user.email
 
-     	if params["pro"] && params["pro"] = "on"
-     		vid.pro = true
-     	end
+      
 
         vid.save
-        return "Video #{vid["title"]} has been yo posted."
+        return "Item #{vid["title"]} has been added to the marketplace."
 
      else
-     return "Video can not be added.Please make sure video's infomration is set."   
+     return "Item can not be added.Please make sure item's infomration is set."   
       end
 
 end
 
 
 get "/videos/new" do
-	authenticate!
-	admin
+  authenticate!
 
-	erb :newvid
+  erb :newvid
 end
 
 get "/upgrade" do
@@ -187,18 +208,6 @@ get "/upgrade" do
     erb :pay
 
 end
-
-get "/selling" do 
-
-
-    erb :selling
-end 
-
-get "/profile" do
-
-  erb :profile
-
-end 
 
 
 post "/charge" do
@@ -217,9 +226,9 @@ post "/charge" do
     :customer    => customer.id
   )
 
-	current_user.pro = true;
-	current_user.save
-  	erb :charge
+  current_user.pro = true;
+  current_user.save
+    erb :charge
 
 end
 
