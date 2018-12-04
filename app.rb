@@ -26,8 +26,9 @@ class Items
   property :item, Text
   property :description, Text
   property :seller, Text
-  property :video_url, Text
   property :condition, Text
+  property :imgData, Text
+  property :price,Text
 
   #fill in the rest
 end
@@ -141,7 +142,7 @@ get "/admin" do
 end
 
 
-get "/videos" do
+get "/items" do
   authenticate!
 
   @Item = Items.all
@@ -151,18 +152,23 @@ get "/videos" do
 
 end
 
+get "/selling" do
+  erb :selling
+end 
+
 post "/seller/create" do
     authenticate!
      if params["Item"] 
-      vid = Items.new
-      vid.item = params["Item"]
-      vid.description = params["description"]
-      vid.condition = params["option"]
-      vid.seller = current_user.email
+      product = Items.new
+      product.item = params["Item"]
+      product.description = params["description"]
+      product.condition = params["option"]
+      product.price = params["price"]
+      product.seller = current_user.email
 
   
-      vid.save
-        return "Item #{vid["title"]} has been added to the marketplace."
+      product.save
+        return "Item #{product["title"]} has been added to the marketplace."
 
      else
      return "Item can not be added.Please make sure item's infomration is set."   
@@ -170,7 +176,10 @@ post "/seller/create" do
 
 end
 
+get "/profile" do
+  erb :profile
 
+end 
 
 get "/upgrade" do
     authenticate!
@@ -179,11 +188,6 @@ get "/upgrade" do
     erb :pay
 
 end
-
-
-get "/selling" do
-  erb :selling
-end 
 
 post "/charge" do
     # Amount in cents
