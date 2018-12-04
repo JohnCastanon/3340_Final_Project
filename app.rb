@@ -123,9 +123,11 @@ get "/reviews" do
   erb :reviews
 end
 
-get "/ad" do
-
-  erb :ad
+get "/ad/:id" do
+  if params[id]
+    @item = Items.get(params[:id])
+    erb :ad
+  end
 end
 
 get "/showreviews" do
