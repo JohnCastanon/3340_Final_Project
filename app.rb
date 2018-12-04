@@ -27,6 +27,7 @@ class Items
   property :description, Text
   property :seller, Text
   property :video_url, Text
+  property :condition, Text
 
   #fill in the rest
 end
@@ -156,11 +157,11 @@ post "/seller/create" do
       vid = Items.new
       vid.item = params["Item"]
       vid.description = params["description"]
+      vid.condition = params["option"]
       vid.seller = current_user.email
 
-      
-
-        vid.save
+  
+      vid.save
         return "Item #{vid["title"]} has been added to the marketplace."
 
      else
