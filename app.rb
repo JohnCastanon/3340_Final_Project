@@ -170,11 +170,6 @@ post "/seller/create" do
 end
 
 
-get "/videos/new" do
-  authenticate!
-
-  erb :newvid
-end
 
 get "/upgrade" do
     authenticate!
