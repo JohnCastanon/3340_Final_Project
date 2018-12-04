@@ -19,7 +19,7 @@ else
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/app.db")
 end
 
-class Video
+class Items
   include DataMapper::Resource
 
   property :id, Serial
@@ -27,14 +27,13 @@ class Video
   property :description, Text
   property :seller, Text
   property :video_url, Text
-  property :pro, Boolean, :default => false
 
   #fill in the rest
 end
 
 DataMapper.finalize
 User.auto_upgrade!
-Video.auto_upgrade!
+Items.auto_upgrade!
 
 
 def youtube_embed(youtube_url)
@@ -59,16 +58,7 @@ if User.all(administrator: true).count == 0
   u.administrator = true
   u.save
 
-
-
-
 end
-
-
-
-
-
-
 
 def reg_user 
 if !current_user || current_user.pro || current_user.administrator
@@ -153,32 +143,21 @@ end
 get "/videos" do
   authenticate!
 
+  if current_user.pro || current_user.administrator
+  @Item = Items.all
 
-
-if current_user.pro || current_user.administrator
-  @videos = Video.all
-
-else
-  @videos = Video.all(pro: false)
-  
-end 
-
-
-
-
-
-  
-  erb :videos
+  else
+    @Item = Items.all(pro: false)
+    
+  end 
+    erb :videos
 
 end
-
-
-
 
 post "/seller/create" do
     authenticate!
      if params["Item"] 
-      vid = Video.new
+      vid = Items.new
       vid.item = params["Item"]
       vid.description = params["description"]
       vid.seller = current_user.email
@@ -210,6 +189,10 @@ get "/upgrade" do
 end
 
 
+get "/selling" do
+  erb :selling
+end 
+
 post "/charge" do
     # Amount in cents
   @amount = 500
@@ -231,6 +214,7 @@ post "/charge" do
     erb :charge
 
 end
+
 
 
 
