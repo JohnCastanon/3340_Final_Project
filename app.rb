@@ -143,14 +143,10 @@ end
 get "/videos" do
   authenticate!
 
-  if current_user.pro || current_user.administrator
   @Item = Items.all
 
-  else
-    @Item = Items.all(pro: false)
-    
-  end 
-    erb :videos
+  
+    erb :items
 
 end
 
