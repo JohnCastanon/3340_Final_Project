@@ -1,19 +1,4 @@
-<!-- <div class="container">
-  <% @Item.each do |i| %>
-  
-  <h2>  <%= i.seller%>   
 
-  <h2>  <%= i.item %> </h2> 
-
-
-  <p><%= i.description %></p>
-
-  <p><%= i.condition %></p>
-  <p> <%= i.imgData %></p>
-
-  <% end %>
-
-</div> -->
 <div class="container">
 	<div class= "p-5">
 		<div class="p-5 card bg-info">
@@ -47,7 +32,7 @@
 				      <h5 class="card-title"><%=i.item %> </h5>
 				      <p class="card-text"> <em>$<%=i.price %></em></p>
 				       <p class="card-text"> <em>$<%=i.seller %></em></p>
-				      <a href=<%="ad/"+ i.seller %> name="seller" class=" btn btn-primary">Contact Seller</a>
+				      <a href=<%="ad/"+ (i.id).to_s %> name="id" class=" btn btn-primary">Contact Seller</a>
 				    </div>
 				</div>
 			<% end %>

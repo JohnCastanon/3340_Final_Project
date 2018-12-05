@@ -38,16 +38,7 @@ User.auto_upgrade!
 Items.auto_upgrade!
 
 
-def youtube_embed(youtube_url)
-  if youtube_url[/youtu\.be\/([^\?]*)/]
-    youtube_id = $1
-  else
-    # Regex from # http://stackoverflow.com/questions/3452546/javascript-regex-how-to-get-youtube-video-id-from-url/4811367#4811367
-    youtube_url[/^.*((v\/)|(embed\/)|(watch\?))\??v?=?([^\&\?]*).*/]
-    youtube_id = $5
-  end
-  %Q{<iframe title="YouTube video player" width="640" height="390" src="https://www.youtube.com/embed/#{ youtube_id }" frameborder="0" allowfullscreen></iframe>}
-end
+
 
 
 
@@ -123,11 +114,13 @@ get "/reviews" do
   erb :reviews
 end
 
-get "/ad/:seller" do
-  if params["seller"]
-    @item = Items.get(params[:seller])
+get "/ad/:id" do
+    
+    ma = params[:id]
+    thing = Items.get(ma)
+    @hi = thing
     erb :ad
-  end
+  
 end
 
 get "/showreviews" do

@@ -6,9 +6,14 @@
       
 <div class = "text-left">
   <bold>Seller: </bold>
-   <h4>IphoneSeller94</h4>
+   <h4> <%= @hi.seller%> </h4>
    <h4 >  99% Rating</h4>
    <h4 ><a href="http://www.google.com">Reviews</a></h4>
+
+
+
+
+
 
 
 
@@ -44,14 +49,14 @@
   </a>
 
 <div >
-       <h3>iPhone 20X</h1>
-       <h2>$700.00</h2>
-       <h2>Like New</h2>
+       <h3><%= @hi.item%> </h1>
+       <h2><%= @hi.price%> </h2>
+       <h2><%= @hi.condition%> </h2>
       </div>
 
       <div>
-        <bold>Description: </bold>
-        <p1>Fully functional. Our devices are professionally tested and cleaned to the highest standards. Accessories are included. Warranty included as well.</p1>
+        <bold>Description: <%= @hi.description%>  </bold>
+        <p1></p1>
       </div><br>
 
       <button type="button" class="btn btn-success">Contact Seller</button>
