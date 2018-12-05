@@ -1,6 +1,7 @@
 require "sinatra"
 require 'data_mapper'
 require 'stripe'
+require 'sinatra/flash'
 
 require_relative "authentication.rb"
 
@@ -36,10 +37,6 @@ end
 DataMapper.finalize
 User.auto_upgrade!
 Items.auto_upgrade!
-
-
-
-
 
 
 
@@ -153,7 +150,7 @@ end
 
 post "/seller/create" do
     authenticate!
-     if params["Item"] 
+     if params["description"]!="" && params["price"]!=""
       product = Items.new
       product.item = params["Item"]
       product.description = params["description"]
@@ -163,11 +160,12 @@ post "/seller/create" do
 
   
       product.save
-        return "Item #{product["title"]} has been added to the marketplace."
+        flash[:notice]="Hooray, Flash is working!."
+        
 
      else
-     return "Item can not be added.Please make sure item's infomration is set."   
-      end
+      flash[:error]="Item can not be added.Please make sure item's infomration is set."  
+    end
 
 end
 

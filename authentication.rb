@@ -36,7 +36,7 @@ post "/register" do
 	email = params[:email]
 	password = params[:password]
 
-	if email && password && User.first(email: email.downcase).nil?
+	if (email && password)!="" && User.first(email: email.downcase).nil?
 		u = User.new
 		u.email = email.downcase
 		u.password =  password
