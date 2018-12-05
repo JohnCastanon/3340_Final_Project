@@ -105,7 +105,7 @@ end
 # if they are not signed in, current_user will be nil
 
 get "/" do
-
+  @Item = Items.all
   erb :index
 end
 

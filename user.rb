@@ -7,7 +7,8 @@ else
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/app.db")
 end
 
-class User
+class 
+    User
     include DataMapper::Resource
     property :id, Serial
     property :email, String

@@ -12,80 +12,51 @@
 
 </style>
 
-<div class="jumbotron" style="background-color: #000000;">
+<div class="jumbotron" style="background-image: url('images/marketplace.jpg'); background-size:100%";>
           
-
-
-        <div class="container">
-                <h1 class="display-1">Borrow It! </h1>
-                <p >RENT, BUY, and SELL.</p>
-
-                  <div id = "item">
-                      <nav class="navbar navbar-clear bg-clear">
-                        <form class="form-inline">
-                          <input href="videos" class="form-control mr-sm-2" type="search" placeholder="What Item?" aria-label="Search">
-                          <button href="videos" role="button" id = "search" class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                      </nav>
-
-
-
-                   </div>
-
-                 
-                 
-
-                  
-
-
-
-
-                  <div id = "zip">
-                    <nav class="navbar navbar-clear bg-clear">
-                      <form class="form-inline">
-                        <input class="form-control mr-sm-2" type="search" placeholder="What's your zipcode?" aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                      </form>
-                    </nav>  </br>
-
-                   </div>
-
-
-            </div>
-
-
-            
-
-    </div>
-
-
-
-
-
-    
+  <div class="container ">
+    <h1 class="display-1 text-white"><strong>Pulga Online! </strong></h1>
+      <p class="text-white"><strong>RENT, BUY, and SELL.</strong></p>
+        <div id = "item">
+          <nav class="navbar navbar-clear bg-clear">
+              <form class="form-inline">
+                <input href="videos" class="form-control mr-sm-2 ttex" type="search" placeholder="What Item?" aria-label="Search">
+              <button href="videos" role="button" id = "search" class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+              </form>
+            </nav>
+        </div>
   
-
-
-
+        <div id = "zip">
+          <nav class="navbar navbar-clear bg-clear">
+            <form class="form-inline">
+              <input class="form-control mr-sm-2" type="search" placeholder="What's your zipcode?" aria-label="Search">
+            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+          </nav>  
+        </div>
+  </div>
+</div>
+</br>
+  <h2 class="text-center pb-5"><strong>Current Market Place</strong></h2>    
   <div class="container">
-    <!-- Example row of columns -->
-    <div class="row">
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-        <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
-      </div>
-      <div class="col-md-4">
-        <h2>Heading</h2>
-        <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
-        <p><a class="btn btn-secondary" href="videos" role="button">View details &raquo;</a></p>
-      </div>
+    <div class="card-columns">
+      <% @Item.each do |i| %>
+        <div class="card">
+          <div class= text-center>
+              <img class="card-img-top" src="/images/imgs.jpg" style=" width:100px; height:100px"alt="Card image cap">
+          </div>
+            <div class="card-body text-center">
+              <h5 class="card-title"><%=i.item %> </h5>
+              <p class="card-text"> <em>$<%=i.price %></em></p>
+               <p class="card-text"> <em>$<%=i.seller %></em></p>
+              <a href=<%="ad/"+ (i.id).to_s %> name="id" class=" btn btn-primary">Contact Seller</a>
+            </div>
+        </div>
+      <% end %>
     </div>
+</div>
+  </div>
+</div>
 
     <hr>
 
