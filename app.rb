@@ -76,9 +76,6 @@ def admin
 end
 
 
-
-
-
 #make an admin user if one doesn't exist!
 if User.all(administrator: true).count == 0
   u = User.new
@@ -158,13 +155,22 @@ post "/seller/create" do
       product.price = params["price"]
       product.seller = current_user.email
 
+
+      @filename = params[:file][:filename]
+      file = params[:file][:tempfile]
+      File.open("./public/images/items/#{@filename}", 'wb') do |f|
+      f.write(file.read)
+      end
+
+      product.imgData="/images/items/#{@filename}"
   
       product.save
-        flash[:notice]="Hooray, Flash is working!."
-        
+        flash[:success]="Hooray, Flash is working!."
+        redirect "/items" 
 
      else
-      flash[:error]="Item can not be added.Please make sure item's infomration is set."  
+      flash[:error]="Item can not be added.Please make sure item's infomration is set." 
+      redirect "/selling" 
     end
 
 end
@@ -184,14 +190,13 @@ end
 
 get "/search" do 
     value=params["search"]
-    @value=Items.all(:item => value)
+    @value=Items.all(:item.gte => value)
     erb :search
 end 
 
 
 get "/form" do
-    
-   
+  
   erb :form
 end
 
@@ -200,10 +205,7 @@ post '/save_image' do
 
   @filename = params[:file][:filename]
   file = params[:file][:tempfile]
-
-  
-
-    File.open("./public/#{@filename}", 'wb') do |f|
+    File.open("./public/images/items/#{@filename}", 'wb') do |f|
     f.write(file.read)
   end
 
