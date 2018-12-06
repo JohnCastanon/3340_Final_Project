@@ -1,3 +1,4 @@
+
 require "sinatra"
 require 'data_mapper'
 require 'stripe'
@@ -109,12 +110,12 @@ get "/reviews" do
 end
 
 get "/ad/:id" do
-    
+
     ma = params[:id]
     thing = Items.get(ma)
     @hi = thing
     erb :ad
-  
+
 end
 
 get "/showreviews" do
@@ -136,7 +137,7 @@ get "/items" do
 
   @Item = Items.all
 
-  
+
     erb :items
 
 end
@@ -147,7 +148,14 @@ end
 
 post "/seller/create" do
     authenticate!
+    if current_user.objects==25
+      flash[:error] ="Your capacity has exceeded!"
+      redirect "/items"
+    else
+  
+  
      if params["description"]!="" && params["price"]!=""
+      current_user.update(:objects => current_user.objects+1)
       product = Items.new
       product.item = params["Item"]
       product.description = params["description"]
@@ -158,19 +166,20 @@ post "/seller/create" do
 
       @filename = params[:file][:filename]
       file = params[:file][:tempfile]
-      File.open("./public/images/items/"+(product.id).to_s+"#{@filename}", 'wb') do |f|
+      File.open("./public/images/items/#{@filename}"+(product.id).to_s, 'wb') do |f|
       f.write(file.read)
       end
-      
-      product.imgData="images/items/"+(product.id).to_s+"#{@filename}"
+  
+      product.imgData="/images/items/#{@filename}"+(product.id).to_s
       product.save
-        flash[:success]="Hooray, Flash is working!."
+        flash[:success]="Your object has been added"
         redirect "/items" 
 
      else
-      flash[:error]="Item can not be added.Please make sure item's infomration is set." 
+      flash[:error]="Item can not be added.Please make sure item's information is set." 
       redirect "/selling" 
     end
+  end
 
 end
 
@@ -195,7 +204,7 @@ end
 
 
 get "/form" do
-  
+
   erb :form
 end
 
@@ -235,7 +244,6 @@ post "/charge" do
     erb :charge
 
 end
-
 
 
 

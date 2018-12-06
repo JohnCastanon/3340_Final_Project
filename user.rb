@@ -15,6 +15,7 @@ class
     property :username, String
     property :password, String
     property :created_at, DateTime
+    property :objects, Integer, :default => 0 
     property :administrator, Boolean, :default => false
     property :pro, Boolean, :default => false
 
@@ -30,3 +31,4 @@ DataMapper.finalize
 
 # automatically create the post table
 User.auto_upgrade!
+
