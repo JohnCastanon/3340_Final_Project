@@ -188,6 +188,31 @@ get "/search" do
     erb :search
 end 
 
+
+get "/form" do
+    
+   
+  erb :form
+end
+
+
+post '/save_image' do
+
+  @filename = params[:file][:filename]
+  file = params[:file][:tempfile]
+
+  
+
+    File.open("./public/#{@filename}", 'wb') do |f|
+    f.write(file.read)
+  end
+
+  erb :show_image
+end
+
+
+
+
 post "/charge" do
     # Amount in cents
   @amount = 500
