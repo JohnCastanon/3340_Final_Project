@@ -182,6 +182,12 @@ get "/upgrade" do
 
 end
 
+get "/search" do 
+    value=params["search"]
+    @value=Items.all(:item => value)
+    erb :search
+end 
+
 post "/charge" do
     # Amount in cents
   @amount = 500

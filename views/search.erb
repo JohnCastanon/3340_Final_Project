@@ -1,29 +1,12 @@
 
-<div class="container">
-	<div class= "p-5">
-		<div class="p-5 card bg-info">
-			<div class=row p>
-				<div class="col">
-			 	 <img class="card-img" src="/images/background.jpg" alt="Card image">
-			 	</div>
-			 	<div class="col">
-			 	 <img class="card-img" src="/images/background.jpg" alt="Card image">
-			 	</div>
-			 	<div class="col">
-			 	 <img class="card-img" src="/images/background.jpg"  alt="Card image">
-			 	</div>
-			</div>
-		</div>
-	</div>
-
-	 <form action="/search" method="GET"class="form-inline p-2">
-		<input class="form-control mr-sm-2" name="search" type="search" placeholder="Looking for" aria-label="Search">
+	 <form class="form-inline p-2">
+		<input class="form-control mr-sm-2" type="search" placeholder="Looking for" aria-label="Search">
 		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 	</form>
 	   
 	<div class="container">
 		<div class="card-columns">
-			<% @Item.each do |i| %>
+			<% @value.each do |i| %>
 				<div class="card">
 					<div class= text-center>
 				    	<img class="card-img-top" src="/images/imgs.jpg" style=" width:100px; height:100px"alt="Card image cap">
@@ -37,6 +20,5 @@
 				</div>
 			<% end %>
 		</div>
-</div>
 	</div>
 </div>
