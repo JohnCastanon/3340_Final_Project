@@ -166,14 +166,15 @@ post "/seller/create" do
 
       @filename = params[:file][:filename]
       file = params[:file][:tempfile]
-      File.open("./public/images/items/#{@filename}"+(product.id).to_s, 'wb') do |f|
+      File.open("./public/images/items/"+(product.id).to_s+"#{@filename}", 'wb') do |f|
       f.write(file.read)
       end
   
-      product.imgData="/images/items/#{@filename}"+(product.id).to_s
-      product.save
+      product.imgData="/images/items/"+(product.id).to_s+"#{@filename}"
+      product.save 
         flash[:success]="Your object has been added"
-        redirect "/items" 
+        redirect "/items"
+
 
      else
       flash[:error]="Item can not be added.Please make sure item's information is set." 
