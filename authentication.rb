@@ -16,9 +16,11 @@ post "/process_login" do
 
 	if(user && user.login(password))
 		session[:user_id] = user.id
+    flash[:success] = "You have logged in"
 		redirect "/"
 	else
-		erb :"authentication/invalid_login"
+    flash[:error]="Could not log in, try again."
+    redirect "/login"
 	end
 end
 
@@ -44,9 +46,11 @@ post "/register" do
 
 		session[:user_id] = u.id
 
-		erb :"authentication/successful_signup"
+		flash[:success] = "You have signed up"
+    redirect "/"
 	else
-		erb :"authentication/failed_signup"
+    flash[:error]= "Error, failed to sign up" 
+		redirect "/sign_up"
 	end
 
 end
