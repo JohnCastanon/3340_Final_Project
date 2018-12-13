@@ -15,6 +15,18 @@
 .move{
   padding-left: 300px;
 }
+.cardpads{
+  padding-left:20px; 
+  padding-bottom:10px;
+
+}
+
+.cardsize{
+  padding-left:45px;
+  padding-right:45px;
+
+
+}
 
 </style>
 <link rel="stylesheet" type="text/css" href="style.css" />
@@ -44,26 +56,28 @@
 <% if current_user%>
   <h2 class="text-center pb-5"><strong>Current Market Place</strong></h2>    
   <div class="container">
-    <div class="card-columns">
-      <% @Item.each do |i| %>
-        <div class="card">
-          <div class= text-center>
-              <img class="card-img-top" src=<%=i.imgData%> style=" width:100px; height:100px"alt="Card image cap">
-          </div>
-            <div class="card-body text-center">
-              <h5 class="card-title"><%=i.item %> </h5>
-              <p class="card-text">$<em><%=i.price %></em></p>
-              <% if current_user.pro || current_user.administrator%>
-               <a href=<%="ad/"+ (i.id).to_s %> name="id" class=" btn btn-primary">Contact Seller</a>
-              <% else %>
-              <button type="button" class="btn btn-secondary " data-toggle="tooltip" data-placement="left" title="Sign in to view Info">
-              Contact Seller
-            </button>
-              <% end %>
+    <div class="row py-2">
+        <% @Item.each do |i| %>
+        <div class="cardpads">
+          <div class="card cardsize ">
+            <div class="text-center pt-4">
+                <img class="card-img-top" src=<%= i.imgData%> style=" width:120px; height:150px" alt="Card image cap">
             </div>
+              <div class="card-body text-center">
+                <h5 class="card-title"><%=i.item %> </h5>
+                <p class="card-text">Price:$<em><%=i.price %></em></p>
+                  <% if current_user%>
+                 <a href=<%="ad/"+ (i.id).to_s %> name="id" class=" btn btn-primary">Contact Seller</a>
+                <% else %>
+                <button type="button" class="btn btn-secondary " data-toggle="tooltip" data-placement="left" title="Login to view">
+                Contact Seller
+              </button>
+                <% end %>
+              </div>
+          </div>
         </div>
-      <% end %>
-    </div>
+        <% end %>
+      </div>
   </div>
 <% else %>
   

@@ -48,6 +48,7 @@ Items.auto_upgrade!
 if User.all(administrator: true).count == 0
   u = User.new
   u.email = "admin@admin.com"
+  u.username ="admin"
   u.password = "admin"
   u.administrator = true
   u.save
@@ -86,12 +87,6 @@ if User.all(administrator: true).count == 0
   u.administrator = true
   u.save
 end
-
-
-
-
-
-
 
 get "/" do
   @Item = Items.all
@@ -160,7 +155,7 @@ post "/seller/create" do
     else
   
   
-     if params["description"]!="" && params["price"]!=""
+     if params["description"]!="" && params["price"]!="" && params[:file]!=nil
       current_user.update(:objects => current_user.objects+1)
       product = Items.new
       product.item = params["Item"]

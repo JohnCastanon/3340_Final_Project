@@ -1,4 +1,21 @@
 <!-- items page, where the current items in the market place are sold -->
+
+<style>
+.cardpads{
+	padding-left:20px; 
+	padding-bottom:10px;
+
+}
+
+.cardsize{
+	padding-left:45px;
+	padding-right:45px;
+
+
+}
+
+</style>
+
 <div class="container">
 	<div class= "p-5">
 		<div class="p-5 card bg-info">
@@ -16,17 +33,18 @@
 		</div>
 	</div>
 <!-- The a card with an instance of the sellers information.  If the user is not login, he or she cannot see the product information.   -->
+	
 	 <form action="/search" method="GET" class="form-inline p-2">
 		<input class="form-control mr-sm-2" name="search" type="search" placeholder="Looking for" aria-label="Search">
 		<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 	</form>
 	   
-	<div class="container">
-		<div class="card-columns">
+		<div class="row py-2">
 			<% @Item.each do |i| %>
-				<div class="card">
+			<div class="cardpads">
+				<div class="card cardsize ">
 					<div class= "text-center pt-4">
-				    	<img class="card-img-top" src=<%= i.imgData%> style=" width:100px; height:100px" alt="Card image cap">
+				    	<img class="card-img-top" src=<%= i.imgData%> style=" width:120px; height:150px" alt="Card image cap">
 					</div>
 				    <div class="card-body text-center">
 				      <h5 class="card-title"><%=i.item %> </h5>
@@ -41,8 +59,8 @@
 				     	<% end %>
 				    </div>
 				</div>
+			</div>
 			<% end %>
 		</div>
-</div>
-	</div>
+	
 </div>

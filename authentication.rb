@@ -18,7 +18,7 @@ post "/process_login" do
 
 	if(user && user.login(password))
 		session[:user_id] = user.id
-    flash[:success] = "You have logged in"
+    flash[:success] = "Welcome #{current_user.username}"
 		redirect "/"
 	else
     flash[:error]="Could not log in, try again."
@@ -40,11 +40,13 @@ end
 post "/register" do
 	email = params[:email]
 	password = params[:password]
+	username= params[:username]
 
 	if (email && password)!="" && User.first(email: email.downcase).nil?
 		u = User.new
 		u.email = email.downcase
 		u.password =  password
+		u.username = username
 		u.save
 
 		session[:user_id] = u.id
