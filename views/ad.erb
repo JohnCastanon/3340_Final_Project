@@ -1,10 +1,23 @@
-<div class = "p-4">
- 
-   <div class ="">
-      <strong>Seller:</strong>
-       <p><%= @hi.seller%><p>
-       <h5 ><a href="#">Reviews</a></h5>
-    </div>
+
+<div class = "text-center p-4">
+
+          <div>
+      
+           <div class = "text-left">
+              <bold>Seller: </bold>
+               <h4> <%= @hi.seller%> </h4>
+               <h4 >  99% Rating</h4>
+               <h4 ><a href="/showreviews">Reviews</a></h4>
+               <a href=<%="/profile/"+ (@hi.seller).to_s %>><button type="button" class="btn btn-danger">Seller's Marketplace</button>
+               </a>
+              </div>
+            <div>
+
+</div>
+
+
+
+
     <div  class="text-center">  
     <img  src=<%=@hi.imgData %> style=" width:300px; height:300px">
     <h5 class="pt-2"><%= @hi.item%> </h5>

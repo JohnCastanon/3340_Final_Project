@@ -1,37 +1,48 @@
-<div class="text-center">  <h1><bold> ADMIN PAGE </bold></h1> </div>
+
+<br>
+
+
+<div class="text-center">  <h1><bold> ADMIN PAGE </bold></h1> </div><br>
 
 
 
-<table class="table table-dark">
-  <thead>
+<center>
+<div class="card text-center bg-light w-75">
+  <div class="card-body">
+    <h5 class="card-title">Sellers</h5>
+    
+
+<table  class="table p-5">
+  <thead class="thead-light">
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Username</th>
-      <th scope="col"># of Items</th>
-      <th scope="col">Delete</th>
+      <th scope = "col" >User</th>
+      <th scope = "col" >Email</th>
+      <th scope = "col" >rating</th>
+      <th scope = "col" >Delete User</th>
     </tr>
   </thead>
   <tbody>
+ <% User.each do |i| %>
     <tr>
-      <th scope="row">1</th>
-      <td>IphoneSeller94</td>
-      <td>4</td>
-      <td><button type="button" class="btn btn-danger">Danger</button>
-</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jane_X09</td>
-      <td>13</td>
-      <td><button type="button" class="btn btn-danger">Danger</button>
-</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry_90</td>
-      <td>23</td>
-      <td><button type="button" class="btn btn-danger">Danger</button>
-</td>
-    </tr>
+      <td><%=i.id%></td>
+      <td><%=i.email%></td>
+      <td>5 stars</td>
+      <td><a href=<%="deleteuser/"+ (i.id).to_s %>><button type="button" class="btn btn-danger">Delete</button>
+</a></td>
+    <%end%>
   </tbody>
 </table>
+
+
+
+
+  </div>
+</div>
+
+
+</center><br>
+
+
+
+
+
