@@ -1,46 +1,22 @@
-
-
-<div class = "text-center p-4">
-
-    <div>
-      
-           <div class = "text-left">
-              <bold>Seller: </bold>
-               <h4> <%= @hi.seller%> </h4>
-               <h4 >  99% Rating</h4>
-               <h4 ><a href="http://www.google.com">Reviews</a></h4>
-
-             </div>
-     
-              <div>
-<!--                 <img  src=<%="/"+ @hi.imgData %> style=" width:100px; height:100px" >
- -->
-              </div>
-
-      
-                  <div >
-                       <img  src=<%=@hi.imgData %> style=" width:100px; height:100px" >
-
-                       <h3><%= @hi.item%> </h3>
-                       <h2><%= @hi.price%> </h2>
-                       <h2><%= @hi.condition%> </h2>
-                  </div>
-
-            <div>
-              <bold>Description: <%= @hi.description%>  </bold>
-              <p1></p1>
-            </div><br>
-
-            <button type="button" class="btn btn-success">Contact Seller</button>
-
-        </div>
-
-
-  
-    
-      
-  
-
+<div class = "p-4">
+ 
+   <div class ="">
+      <strong>Seller:</strong>
+       <p><%= @hi.seller%><p>
+       <h5 ><a href="#">Reviews</a></h5>
+    </div>
+    <div  class="text-center">  
+    <img  src=<%=@hi.imgData %> style=" width:300px; height:300px">
+    <h5 class="pt-2"><%= @hi.item%> </h5>
+    <p> <strong> Price:</strong><%= @hi.price%></p>
+    <p> <strong> Condition:</strong><%=@hi.condition%> </p>
+    <p><strong>Description:</strong> <%= @hi.description%>  </p>
+    </div>
+    <p1></p1>
+    <br>
+  <div class="pt-2"> 
+  <a href="/items" class="btn btn-success">Back to MarketPlace</a>
+  </div>
  </div>
 
 
