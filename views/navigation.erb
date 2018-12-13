@@ -28,6 +28,11 @@
        <li class="nav-item">
           <a class="nav-link" href="/items">Items</a>
         </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="/selling">Post Item</a>
+        </li>
+      
       <% if !current_user%>
        <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
@@ -52,11 +57,7 @@
         <% end %>
       <%end %>
 
-<% if current_user.pro %>
-        <li class="nav-item">
-          <a class="nav-link" href="/selling">Post Item</a>
-        </li>
-      <% end %>
+   
       
       <% if current_user %>
       

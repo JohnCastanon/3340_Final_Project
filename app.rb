@@ -225,7 +225,7 @@ end
 #show a profile page for the user
 
 get "/profile/:seller" do
-
+   authenticate!
  
   @Item = Items.get(params[:seller])
   # @User = User.get(params[:id])
