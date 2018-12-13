@@ -48,6 +48,7 @@ Items.auto_upgrade!
 if User.all(administrator: true).count == 0
   u = User.new
   u.email = "admin@admin.com"
+  u.username ="admin"
   u.password = "admin"
   u.administrator = true
   u.save
@@ -64,22 +65,11 @@ end
 
 
 def pro_user 
-if !current_user.pro 
-      flash[:success]="Please upgrade account first."
-      redirect "/"
+if current_user.pro
+    redirect "/"
 end
 
 end 
-
-
-def paid_user 
-if !current_user.pro 
-      flash[:success]="Please upgrade account first."
-      redirect "/"
-end
-
-end 
-
 
 
 def admin
@@ -97,12 +87,6 @@ if User.all(administrator: true).count == 0
   u.administrator = true
   u.save
 end
-
-
-
-
-
-
 
 get "/" do
   @Item = Items.all
@@ -132,7 +116,7 @@ get "/showreviews" do
   erb :showreviews
 end
 
-#admin page for displaying paid users
+#admin page for the adming
 get "/admin" do
 
   authenticate!
@@ -142,26 +126,10 @@ get "/admin" do
 end
 
 
-#admin page for the displaying users
-get "/deleteuser/:id" do 
-     
-    admin
-    thing = User.get(params[:id])
-
-    if thing != nil
-    thing.destroy
-    end
-
-    flash[:success]="User has been terminated."
-        redirect "/admin"
-
-end 
-
-
-
 
 #gets all the items in the database and displays it in the items.erb
 get "/items" do
+  authenticate!
 
   @Item = Items.all
 
@@ -173,9 +141,6 @@ end
 #calls the :selling form to a new item 
 
 get "/selling" do
-  authenticate!
-  paid_user 
-
   erb :selling
 end 
 
@@ -190,7 +155,7 @@ post "/seller/create" do
     else
   
   
-     if params["description"]!="" && params["price"]!=""
+     if params["description"]!="" && params["price"]!="" && params[:file]!=nil
       current_user.update(:objects => current_user.objects+1)
       product = Items.new
       product.item = params["Item"]
@@ -224,36 +189,16 @@ end
 
 #show a profile page for the user
 
-get "/profile/:seller" do
-   authenticate!
- 
-  @Item = Items.get(params[:seller])
-  # @User = User.get(params[:id])
-
-
-
-
+get "/profile" do
   erb :profile
 
 end 
-
-#displays sellers reviews
-
-get "/showreviews" do
-
-
-  erb :showreviews
-
-end 
-
-
 
 
 #takes you to the pay.erb to Upgrade to a pro user
 get "/upgrade" do
     authenticate!
-
-
+    reg_user 
 
     erb :pay
 
@@ -264,13 +209,6 @@ get "/search" do
     value=params["search"].downcase
     @Item=Items.all(:lower => value)
     erb :items
-end 
-
-get "/admin" do 
-   
-     @User = User.all
-
-    erb :admin
 end 
 
 
