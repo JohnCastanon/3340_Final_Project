@@ -9,34 +9,37 @@
     left: 50%;
     transform: translate(-50%, -50%);
 }
+.home{
+  padding-left: 420px;
+}
+.move{
+  padding-left: 300px;
+}
 
 </style>
+<link rel="stylesheet" type="text/css" href="style.css" />
 
-<div class="jumbotron" style="background-image: url('images/marketplace.jpg'); background-size:100%";>
+<div class="jumbotron mt-3 mx-3 pt-5"  style="background-image: url('/images/website/marketplace.jpg'); background-size:100%";>
           
-  <div class="container ">
+  <div class="container">
     <h1 class="display-1 text-white"><strong>Pulga Online! </strong></h1>
       <p class="text-white"><strong>RENT, BUY, and SELL.</strong></p>
-        <div id = "item">
-          <nav class="navbar navbar-clear bg-clear">
-              <form class="form-inline">
-                <input href="videos" class="form-control mr-sm-2 ttex" type="search" placeholder="What Item?" aria-label="Search">
-              <button href="videos" role="button" id = "search" class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+                <div id= "item" class="pb-5">
+              <form  action="/query" method="GET" class="form-inline">
+                <input class="form-control mr-sm-2" name="searchValue" type="search" placeholder="What Item?" aria-label="Search">
+                 <input class="form-control mr-sm-2" name="zipcode" type="search" placeholder="What's your zipcode?" aria-label="Search">
+              <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
+              <div class="move">
+                 <button class="btn btn-primary  px-3 py-3" type="submit">Start Selling Now</button>
+              </div>
               </form>
-            </nav>
         </div>
-  
-        <div id = "zip">
-          <nav class="navbar navbar-clear bg-clear">
-            <form class="form-inline">
-              <input class="form-control mr-sm-2" type="search" placeholder="What's your zipcode?" aria-label="Search">
-            <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-          </nav>  
-        </div>
+       
+
   </div>
 </div>
 </br>
+<% if current_user%>
   <h2 class="text-center pb-5"><strong>Current Market Place</strong></h2>    
   <div class="container">
     <div class="card-columns">
@@ -47,26 +50,48 @@
           </div>
             <div class="card-body text-center">
               <h5 class="card-title"><%=i.item %> </h5>
-              <p class="card-text"> <em>$<%=i.price %></em></p>
-               <p class="card-text"> <em>$<%=i.seller %></em></p>
-              <a href=<%="ad/"+ (i.id).to_s %> name="id" class=" btn btn-primary">Contact Seller</a>
+              <p class="card-text">$<em><%=i.price %></em></p>
+              <% if current_user.pro || current_user.administrator%>
+               <a href=<%="ad/"+ (i.id).to_s %> name="id" class=" btn btn-primary">Contact Seller</a>
+              <% else %>
+              <button type="button" class="btn btn-secondary " data-toggle="tooltip" data-placement="left" title="Sign in to view Info">
+              Contact Seller
+            </button>
+              <% end %>
             </div>
         </div>
       <% end %>
     </div>
-</div>
+  </div>
+<% else %>
+  
+    <div class="container">
+    <h2 class="text-center"><strong> Welcome</strong></h2> 
+    <h5 class="text-center">Log in or <a href="/sign_up"> Sign up </a>to view items</h5>
+    <br>
+    <form action="/process_login" method="POST" class="home">
+      <div class="">
+          <div class="row">
+          <div class="form-group col-sm-5">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" name="email"  placeholder="Enter email">
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-sm-5">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" name="password" placeholder="Password">
+          </div>
+        </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
   </div>
 </div>
+<%end%>
+
+
+
 
     <hr>
-
-
-
-
-
-
-
-
-
-
 </div> <!-- /container -->
