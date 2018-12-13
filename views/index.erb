@@ -1,7 +1,7 @@
-<!-- Main jumbotron for a primary marketing message or call to action -->
+Main jumbotron for a primary marketing message or call to action -->
 
 
-
+<!-- styling for the page -->
 <style>
 .centered {
     position: absolute;
@@ -18,7 +18,7 @@
 
 </style>
 <link rel="stylesheet" type="text/css" href="style.css" />
-
+<!-- jumbotron with a search bar, and can also click on the selling button if the user is pro and sign up -->
 <div class="jumbotron mt-3 mx-3 pt-5"  style="background-image: url('/images/website/marketplace.jpg'); background-size:100%";>
           
   <div class="container">
@@ -38,6 +38,8 @@
 
   </div>
 </div>
+
+<!-- Shows the current market place if the user is sign up, they can search the items through the search bar. Else a sign in form is display in the page -->
 </br>
 <% if current_user%>
   <h2 class="text-center pb-5"><strong>Current Market Place</strong></h2>    
@@ -94,4 +96,4 @@
 
 
     <hr>
-</div> <!-- /container -->
+</div> <!-- /container

@@ -21,6 +21,7 @@ else
   DataMapper::setup(:default, "sqlite3://#{Dir.pwd}/app.db")
 end
 
+# class for the iteams added 
 class Items
   include DataMapper::Resource
 
@@ -90,14 +91,7 @@ end
 
 
 
-#the following urls are included in authentication.rb
-# GET /login
-# GET /logout
-# GET /sign_up
 
-# authenticate! will make sure that the user is signed in, if they are not they will be redirected to the login page
-# if the user is signed in, current_user will refer to the signed in user object.
-# if they are not signed in, current_user will be nil
 
 get "/" do
   @Item = Items.all
@@ -109,6 +103,8 @@ get "/reviews" do
   erb :reviews
 end
 
+# takes the sellers information and displays it in the ad.erb
+
 get "/ad/:id" do
 
     ma = params[:id]
@@ -118,11 +114,14 @@ get "/ad/:id" do
 
 end
 
+#shows a mockup of reviews when the user click on reviews in the ad.erb
+
 get "/showreviews" do
 
   erb :showreviews
 end
 
+#admin page for the adming
 get "/admin" do
 
   authenticate!
@@ -132,6 +131,8 @@ get "/admin" do
 end
 
 
+
+#gets all the items in the database and displays it in the items.erb
 get "/items" do
   authenticate!
 
@@ -142,10 +143,15 @@ get "/items" do
 
 end
 
+#calls the :selling form to a new item 
+
 get "/selling" do
   erb :selling
 end 
 
+#checks if the user has more than 25 items which is the limit.
+#the params take a description, condition,zipcode, name. 
+#the lower property turns the item name in lowercase, which is used in the search bars 
 post "/seller/create" do
     authenticate!
     if current_user.objects==25
@@ -186,11 +192,15 @@ post "/seller/create" do
 
 end
 
+#show a profile page for the user
+
 get "/profile" do
   erb :profile
 
 end 
 
+
+#takes you to the pay.erb to Upgrade to a pro user
 get "/upgrade" do
     authenticate!
     reg_user 
@@ -199,12 +209,15 @@ get "/upgrade" do
 
 end
 
+#used in the items search bars to look up items 
 get "/search" do 
     value=params["search"].downcase
     @Item=Items.all(:lower => value)
     erb :items
 end 
 
+
+#used in the homepage search bars, check if there is valid input of zipcode an searchVale 
 get "/query" do 
     if params["searchValue"]!="" && params["zipcode"]==""
       value=params["searchValue"].downcase
@@ -225,7 +238,7 @@ get "/query" do
     erb :items
 end 
 
-
+#basic charge for for stripe
 post "/charge" do
     # Amount in cents
   @amount = 500

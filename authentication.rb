@@ -8,6 +8,8 @@ get "/login" do
 end
 
 
+
+#when login it shows flash messages
 post "/process_login" do
 	email = params[:email]
 	password = params[:password]
@@ -24,6 +26,7 @@ post "/process_login" do
 	end
 end
 
+#takes to the homepage when log out 
 get "/logout" do
 	session[:user_id] = nil
 	redirect "/"
