@@ -65,7 +65,7 @@ end
 
 def pro_user 
 if !current_user.pro 
-      flash[:success]="Please upgrade account first."
+      flash[:success]="Must be a seller to post items. Please upgrade."
       redirect "/"
 end
 
@@ -74,7 +74,7 @@ end
 
 def paid_user 
 if !current_user.pro 
-      flash[:success]="Please upgrade account first."
+      flash[:success]="Must be a seller to post items. Please upgrade."
       redirect "/"
 end
 
@@ -174,7 +174,7 @@ end
 
 get "/selling" do
   authenticate!
-  paid_user 
+  paid_user
 
   erb :selling
 end 

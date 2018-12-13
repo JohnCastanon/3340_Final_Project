@@ -21,18 +21,15 @@
     <ul class="navbar-nav mr-auto">
 <li class="nav-item active">
 
+
+
       <li class="nav-item active">
         <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
       </li>
 
-       <li class="nav-item">
+      <li class="nav-item">
           <a class="nav-link" href="/items">Items</a>
         </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="/selling">Post Item</a>
-        </li>
-      
       <% if !current_user%>
        <li class="nav-item">
           <a class="nav-link" href="/login">Login</a>
@@ -47,13 +44,34 @@
           <li class="nav-item">
             <a class="nav-link" href="/upgrade">Upgrade</a>
           </li>
-        <% end %>
+
+          <li class="nav-item">
+            <a class="nav-link" href="/selling">Post Item</a>
+          </li>
 
 
+
+         <% end %>
+
+       
+         
+  <% if current_user.pro && !current_user.administrator %>
+        <li class="nav-item">
+          <a class="nav-link" href="/selling">Post Item</a>
+        </li>
+      <% end %>
         
-      <%end %>
 
-   
+
+        <% if current_user.administrator  %>
+          <li class="nav-item">
+            <a class="nav-link" href="/selling">Post Item</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">Admin</a>
+          </li>
+        <% end %>
+      <%end %>
       
       <% if current_user %>
       
