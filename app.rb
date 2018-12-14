@@ -142,7 +142,7 @@ get "/admin" do
 end
 
 
-#admin page for the displaying users
+#admin page for deleting users
 get "/deleteuser/:id" do 
      
     admin
